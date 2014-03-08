@@ -43,10 +43,6 @@ $bolt['browser']->plug([
             'path' => '/a/{path}',  // to serve assets locally
             'filters' => [
                 ['less', '\Assetic\Filter\LessphpFilter'], // any .less file should be run through a filter
-
-                // when we're compileing
-                ['js', '\Assetic\Filter\JSMinFilter', ['when' => 'compile']],
-                ['less,css', 'Assetic\Filter\CssMinFilter', ['when' => 'compile']]
             ]
         ]],
 
