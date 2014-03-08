@@ -1,0 +1,22 @@
+#!/usr/bin/env php
+<?php
+
+// make sure we have a bootstrap file
+if (!file_exists(__DIR__.'/src/bootstrap.php')) {
+    exit("Unable to load bootstrap file from '".__DIR__."/src/bootstrap.php'.\n");
+}
+
+// get our app
+$app = require __DIR__."/src/bootstrap.php";
+
+// if they've passed back a top level app
+// we need our root app
+if (is_a($app, 'bolt\browser') || is_a($app, 'bolt\cli')) {
+    $app = $app->app;
+}
+
+// bind our bolt client to this app
+bolt\client::bind($app);
+
+// run this app as cli
+$app->run();

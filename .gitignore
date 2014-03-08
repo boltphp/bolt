@@ -1,0 +1,8 @@
+<<<<<<< HEAD
+/compiled
+=======
+/tmp
+>>>>>>> 0bf13f762fb09b435a43caf6e62561acf1f093a6
+/vendor
+composer.phar
+composer.lock

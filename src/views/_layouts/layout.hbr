@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="./favicon.ico">
+    <title>Welcome to Your bolt Application</title>
+
+    <%#= $this->assets->out('style', 'head'); %>
+
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a target="_blank" href="http://bolthq.com">Docs <i class="fa fa-external-link"></i></a></li>
+        </ul>
+        <h3 class="text-muted">bolt Application</h3>
+      </div>
+
+      <%& yield %>
+
+
+      <div class="footer">
+        <p>&copy; Company <% year %> -- bolt <% bVersion %></p>
+      </div>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>
