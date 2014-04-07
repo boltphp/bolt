@@ -4,7 +4,7 @@
     "keywords": ["bolt"],
     "license": "MIT",
     "require": {
-        "boltphp/core": "0.5.0",
+        "boltphp/core": "0.5.1",
         "boltphp/handlebars.php": "v0.8.1"
     },
     "autoload": {
