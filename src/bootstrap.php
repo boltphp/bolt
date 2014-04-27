@@ -22,35 +22,44 @@ $bolt = bolt::init([
     ]);
 
 /**
- * Plugin our browser (http) class
+ * Plugin our http (http) class
  *
  * you can access this plugin by using
- * $bolt['browser']
+ * $bolt['http']
  *
  */
-$bolt->plug('browser', 'bolt\browser');
+$bolt->plug('http', 'bolt\http');
 
 
 /**
  * Plugin the components we need for
- * our browser instance
+ * our http instance
  */
-$bolt['browser']->plug([
+$bolt['http']->plug([
 
         // handle asset managment
-        ['assets', 'bolt\browser\assets', [
-            'dirs' => ['assets'],  // relative to $root,
+        ['assets', 'bolt\http\assets', [
+            'root' => 'assets',  // relative to $root,
             'path' => '/a/{path}',  // to serve assets locally
             'filters' => [
-                ['less', '\Assetic\Filter\LessphpFilter'], // any .less file should be run through a filter
-            ]
+                    'css' => [
+                        new Assetic\Filter\LessphpFilter()
+                    ]
+                ],
+            'ready' => function($assets){
+                $assets->set('app', $assets->collection([
+                        new Assetic\Asset\HttpAsset('http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css'),
+                        new Assetic\Asset\HttpAsset('http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css'),
+                        $assets->glob('css/*css')
+                    ]));
+            }
         ]],
 
         // handle all routing request
-        ['router', 'bolt\browser\router'],
+        ['router', 'bolt\http\router'],
 
         // handle view management
-        ['views', 'bolt\browser\views', [
+        ['views', 'bolt\http\views', [
             'dirs' => [
                 'views' // relative to $root above
             ],
@@ -66,7 +75,7 @@ $bolt['browser']->plug([
  * definitions
  */
 $bolt->env('dev', function(){
-    $this['browser']['router']->loadFromControllers([
+    $this['http']['router']->loadFromControllers([
         b::fs('rdir', $this->path('/controllers'), '^.+\.php$') // glob everything in $root/controllers
     ]);
 });

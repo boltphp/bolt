@@ -8,9 +8,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="./favicon.ico">
     <title>Welcome to Your bolt Application</title>
-
-    <%#= $this->assets->out('style', 'head'); %>
-
+    <link rel="stylesheet" type="text/css" href="/a/collection/app.css">
   </head>
 
   <body>
@@ -25,7 +23,6 @@
       </div>
 
       <%& yield %>
-
 
       <div class="footer">
         <p>&copy; Company <% year %> -- bolt <% bVersion %></p>

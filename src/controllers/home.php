@@ -8,10 +8,10 @@ use \b; // not required, but a helpful shortcut
 
 
 /**
- * Any class that extends 'bolt\browser\controller\route' is checked for
+ * Any class that extends 'bolt\http\controller\route' is checked for
  * routes that it can process
  */
-class home extends \bolt\browser\controller\route {
+class home extends \bolt\http\controller\route {
 
     /**
      * the layout paramater should defined the
@@ -21,7 +21,7 @@ class home extends \bolt\browser\controller\route {
     public $layout = "_layouts/layout.hbr";
 
     /**
-     * because this class extends the 'bolt\browser\controller\route' class
+     * because this class extends the 'bolt\http\controller\route' class
      * you can defined routes that this controller can opporate on. you can
      * also defined routes by defining a static 'getRoutes' method and returning
      * an array
@@ -44,13 +44,6 @@ class home extends \bolt\browser\controller\route {
     ];
 
     public function init() {
-
-        // add our base asses
-        $this->assets->add('style', 'head', [
-                'http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css',
-                'http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css',
-                'css/app.css'
-            ]);
 
         // always need the year
         $this->year = date("Y");
@@ -77,8 +70,8 @@ class home extends \bolt\browser\controller\route {
 
         // return a view bound to this controller.
         // this is the same as calling:
-        //  return new bolt\browser\views\view(['file' => 'home.hbr', 'vars' => $vars, 'parent' => $this])
-        return $this->view('home.hbr', $vars);
+        //  return new bolt\http\views\view(['file' => 'home.hbr', 'vars' => $vars, 'parent' => $this])
+        return $this->format('html', $this->view('home.hbr', $vars));
 
     }
 
@@ -86,7 +79,7 @@ class home extends \bolt\browser\controller\route {
      * this function is called for all GET requests to this
      * controller (that match the second route in self::$routes)
      */
-    public function getHello($message, \bolt\browser\request $req) {
+    public function getHello($message, \bolt\http\request $req) {
 
         // $message is provided by the route above
         // it is equivalent to calling:
@@ -110,7 +103,7 @@ class home extends \bolt\browser\controller\route {
     /**
      * these methods are not required.
      * by default, any method requested and not defined by
-     * a route are ignored
+     * a route is ignored
      */
     public function post() {
         return $this->exception('MethodNotAllowedException');
